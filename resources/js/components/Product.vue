@@ -1,31 +1,59 @@
 <template>
-    <v-card :loading="true">
-        <v-img height="250" src="https://cdn.vuetifyjs.com/images/cards/cooking.png"></v-img>
-        <v-card-title class="pb-0">Cafe Badilico</v-card-title>
+    <v-card :loading="false" flat class="product d-flex flex-column justify-content-between">
+
         <v-card-text>
-            <div class="my-4 subtitle-1">
-                <v-row align="center">
-                    <v-col cols="8"><b>$5000</b></v-col>
-                    <v-col cols="4" class="d-flex">
-                        <v-text-field outlined dense hide-details type="number" min="1" value="1"></v-text-field>
-                    </v-col>
-                </v-row>
-            </div>
-            <div class="desc">Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+            <v-img
+                :src="item.preview_img"
+                lazy-src="/storage/lazy.svg"
+                max-height="240"
+                height="240"
+                contain>
+                <v-btn
+                    class="product__btn-detail"
+                    v-bind="attrs"
+                    v-on="on"
+                    fab small absolute bottom right depressed
+
+                >
+                    <v-icon dark>mdi-dots-vertical</v-icon>
+                </v-btn>
+            </v-img>
+            <v-card-title class="p-0">{{item.name}}</v-card-title>
+            <div class="desc">{{item.description}}</div>
+            <!--            <div class="my-4 subtitle-1">-->
+            <!--                <v-row align="center">-->
+            <!--                    <v-col cols="8"></v-col>-->
+            <!--                    <v-col cols="4" class="d-flex">-->
+            <!--                        <v-text-field outlined dense hide-details type="number" min="1" value="1"></v-text-field>-->
+            <!--                    </v-col>-->
+            <!--                </v-row>-->
+            <!--            </div>-->
+
+            <!--            <v-card-actions class="d-flex justify-center">-->
+            <!--                -->
+            <!--            </v-card-actions>-->
         </v-card-text>
-
-        <v-divider class="m-0"></v-divider>
-
-        <v-card-actions class="d-flex justify-center">
-            <v-btn color="deep-orange lighten-1" class="btn-to-basket" text> Add to card</v-btn>
-        </v-card-actions>
+        <v-card-text class="d-flex align-center pt-0">
+            <span class="product__price deep-orange--text">${{item.price}}</span>
+            <v-spacer></v-spacer>
+            <v-btn depressed rounded outlined color="deep-orange lighten-1" class="product__btn-to-basket">
+                Add to cart
+            </v-btn>
+        </v-card-text>
+        <v-dialog
+            v-model="dialog"
+            width="500"
+        ></v-dialog>
     </v-card>
 </template>
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        props: ['item'],
+        data () {
+            return {
+                dialog: false
+            }
         }
     }
 </script>
