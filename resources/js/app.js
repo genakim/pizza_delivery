@@ -10,8 +10,6 @@ window.Vue = require('vue');
 
 import vuetify from './vuetify'
 
-import App from './App.vue'
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -35,6 +33,5 @@ Vue.component('app-footer', require('./layouts/Footer.vue').default);
 
 const app = new Vue({
     vuetify,
-    render: h => h(App),
-    el: '#app',
+    el: '#app'
 });
