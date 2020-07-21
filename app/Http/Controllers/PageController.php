@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class Page extends Controller
+class PageController extends Controller
 {
     public function index(Product $product)
     {
