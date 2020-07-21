@@ -29,19 +29,22 @@ header {
 }
 
 .product {
-    .product__price {
-        font-weight: bold;
-        font-size: 1.2rem;
+    .v-image {
+        cursor: pointer;
     }
+}
 
-    .product__btn-to-basket {
-        text-transform: capitalize !important;
-        font-weight: bold;
-    }
+.product__price {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.product__btn-detail {
+    bottom: 0 !important;
+}
 
-    .product__btn-detail {
-        bottom: 0 !important;
-    }
+.product-detail__btn-close {
+    top: 0 !important;
+    right: 0 !important;
 }
 
 
