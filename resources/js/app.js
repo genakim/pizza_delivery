@@ -22,6 +22,8 @@ import vuetify from './vuetify'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('product', require('./components/Product.vue').default);
+Vue.component('cart', require('./components/Cart.vue').default);
+Vue.component('header-cart', require('./components/HeaderCart.vue').default);
 Vue.component('app-header', require('./layouts/Header.vue').default);
 Vue.component('app-footer', require('./layouts/Footer.vue').default);
 
@@ -33,5 +35,8 @@ Vue.component('app-footer', require('./layouts/Footer.vue').default);
 
 const app = new Vue({
     vuetify,
-    el: '#app'
+    el: '#app',
+    data: {
+        breadcrumbs: []
+    }
 });
