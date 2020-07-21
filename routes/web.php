@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Page@index')->name('main');
+Route::get('/', 'PageController@index')->name('main');
 
 
