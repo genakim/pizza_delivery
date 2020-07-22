@@ -23,9 +23,11 @@ import vuetify from './vuetify'
 
 Vue.component('product', require('./components/Product.vue').default);
 Vue.component('cart', require('./components/Cart.vue').default);
+Vue.component('order-list', require('./components/OrderList.vue').default);
 Vue.component('header-cart', require('./components/HeaderCart.vue').default);
 Vue.component('app-header', require('./layouts/Header.vue').default);
 Vue.component('app-footer', require('./layouts/Footer.vue').default);
+Vue.component('order-form', require('./components/OrderForm.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

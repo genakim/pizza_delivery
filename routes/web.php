@@ -15,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PageController@index')->name('main');
 
-Route::prefix('cart')->group(function () {
+Route::prefix('cart')->group(static function () {
     Route::get('/', 'CartController@index');
     Route::get('add_item/{product}', 'CartController@addItem');
     Route::get('delete_item/{product}', 'CartController@deleteItem');
     Route::get('change_quantity/{product}', 'CartController@changeQuantity');
+});
+
+Route::group(['prefix' => 'order',  'middleware' => 'order'], static function () {
+    Route::get('/', 'OrderController@index');
+    Route::get('confirm', 'OrderController@confirm');
 });

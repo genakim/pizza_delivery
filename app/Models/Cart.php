@@ -8,6 +8,11 @@ class Cart
     public $totalQuantity = 0;
     public $totalPrice = 0;
     private $cartId = 'cart';
+    public $deliveryCost = 5;
+    private $currencyRates = [
+        'us' => 1,
+        'eu' => 1.2
+    ];
 
     /**
      * Cart constructor.
@@ -59,11 +64,17 @@ class Cart
     }
 
 
+    /**
+     * Save cart
+     */
     public function save(): void
     {
         session()->put($this->cartId, $this);
     }
 
+    /**
+     * Clean cart
+     */
     public function clean(): void
     {
         session()->forget($this->cartId);
@@ -87,8 +98,22 @@ class Cart
         $this->save();
     }
 
+    /**
+     * @param $id int product id
+     */
     public function getItem($id)
     {
         return $this->items[$id];
+    }
+
+    /**
+     * @param $price
+     * @param string $currency
+     * @return float|int
+     */
+    public function getCurrencyPrice($price, $currency = 'us')
+    {
+        $rate = $this->currencyRates[$currency];
+        return round($rate * $price, 2);
     }
 }
