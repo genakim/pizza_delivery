@@ -10,8 +10,6 @@ window.Vue = require('vue');
 
 import vuetify from './vuetify'
 
-import App from './App.vue'
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -24,8 +22,12 @@ import App from './App.vue'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('product', require('./components/Product.vue').default);
+Vue.component('cart', require('./components/Cart.vue').default);
+Vue.component('order-list', require('./components/OrderList.vue').default);
+Vue.component('header-cart', require('./components/HeaderCart.vue').default);
 Vue.component('app-header', require('./layouts/Header.vue').default);
 Vue.component('app-footer', require('./layouts/Footer.vue').default);
+Vue.component('order-form', require('./components/OrderForm.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,6 +37,8 @@ Vue.component('app-footer', require('./layouts/Footer.vue').default);
 
 const app = new Vue({
     vuetify,
-    render: h => h(App),
     el: '#app',
+    data: {
+        breadcrumbs: []
+    }
 });
