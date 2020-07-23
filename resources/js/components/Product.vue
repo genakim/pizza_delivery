@@ -4,7 +4,6 @@
             <v-img
                 @click="dialog = true"
                 :src="item.preview_img"
-                lazy-src="/storage/lazy.svg"
                 max-height="240"
                 height="240"
                 contain>
@@ -19,7 +18,7 @@
                     depressed
                 ><v-icon dark>mdi-dots-vertical</v-icon></v-btn>
             </v-img>
-            <v-card-title class="p-0">{{item.name}}</v-card-title>
+            <v-card-title class="p-0"><b>{{item.name}}</b></v-card-title>
             <div class="desc">{{item.description}}</div>
         </v-card-text>
         <v-card-text class="d-flex align-center pt-0">
@@ -50,7 +49,6 @@
                     <v-col cols="12" sm="6" md="7">
                         <v-img
                             :src="item.full_img"
-                            lazy-src="/storage/lazy.svg"
                             contain>
                         </v-img>
                     </v-col>
@@ -88,6 +86,11 @@
                 </v-row>
             </v-card>
         </v-dialog>
+        <v-snackbar
+            v-model="snackbar"
+            color="deep-orange"
+            timeout="2000"
+        >{{ message }}</v-snackbar>
     </v-card>
 </template>
 
@@ -99,6 +102,8 @@
         data() {
             return {
                 dialog: false,
+                snackbar: false,
+                message: '',
                 quantity: 1
             }
         },
@@ -111,7 +116,13 @@
         },
         methods: {
             addToCart(){
-                this.addItem(this.item.id, this.quantity);
+                this.dialog = false;
+                this.addItem(this.item.id, this.quantity).then((response)=>{
+                    if (response.data.success) {
+                        this.message = this.item.name + ' added to cart';
+                        this.snackbar = true;
+                    }
+                });
             }
         }
     }
