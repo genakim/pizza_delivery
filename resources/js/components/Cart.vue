@@ -19,12 +19,16 @@
             <!-- Footer -->
             <template v-slot:footer>
                 <div class="p-2 d-flex">
-                    <div class="p-2">
-                        <em><sup>*</sup> Click on the <b>Quantity</b> to change</em>
-                    </div>
+                    <div class="p-2 grey--text">Click on the <b>Quantity</b> to change</div>
                     <v-spacer></v-spacer>
                     <!-- Make order -->
-                    <v-btn href="/order" class="text-decoration-none" depressed color="deep-orange lighten-1" :disabled="!totalQuantity">
+                    <v-btn
+                        href="/order"
+                        class="text-decoration-none"
+                        depressed
+                        rounded
+                        color="deep-orange lighten-1"
+                        :disabled="!totalQuantity">
                         <span class="white--text">Make Order</span>
                     </v-btn>
                 </div>

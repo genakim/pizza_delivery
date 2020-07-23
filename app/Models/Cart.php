@@ -103,7 +103,7 @@ class Cart
      */
     public function getItem($id)
     {
-        return $this->items[$id];
+        return $this->items[$id] ?? null;
     }
 
     /**
@@ -115,5 +115,24 @@ class Cart
     {
         $rate = $this->currencyRates[$currency];
         return round($rate * $price, 2);
+    }
+
+    /**
+     * @return array
+     */
+    public function getItems(): array
+    {
+        $data = [];
+        foreach ($this->items as $item){
+            $data[] = [
+                'id' => $item['item']->id,
+                'name' => $item['item']->name,
+                'productPrice' => $item['item']->price,
+                'img' => $item['item']->preview_img,
+                'price' => $item['price'],
+                'quantity' => $item['quantity']
+            ];
+        }
+        return $data;
     }
 }

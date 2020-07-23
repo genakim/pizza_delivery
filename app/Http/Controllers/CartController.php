@@ -21,21 +21,7 @@ class CartController extends Controller
      */
     public function index(Request $request, Cart $cart)
     {
-        return view('cart', [
-            'cart' => $cart,
-            'breadcrumbs' => [
-                [
-                    'text' => 'Menu',
-                    'disabled' => false,
-                    'href' => '/'
-                ],
-                [
-                    'text' => 'Cart',
-                    'disabled' => true,
-                    'href' => '/cart'
-                ]
-            ]
-        ]);
+        return view('cart', ['cart' => $cart]);
     }
 
     /**
@@ -53,7 +39,8 @@ class CartController extends Controller
             'success' => true,
             'data' => [
                 'totalQuantity' => $cart->totalQuantity,
-                'totalPrice' => $cart->totalPrice
+                'totalPrice' => $cart->totalPrice,
+                'items' => $cart->getItems()
             ]
         ]);
     }
@@ -72,7 +59,8 @@ class CartController extends Controller
             'success' => true,
             'data' => [
                 'totalQuantity' => $cart->totalQuantity,
-                'totalPrice' => $cart->totalPrice
+                'totalPrice' => $cart->totalPrice,
+                'items' => $cart->getItems()
             ]
         ]);
     }
@@ -87,17 +75,24 @@ class CartController extends Controller
     public function changeQuantity(Product $product, Request $request, Cart $cart)
     {
         $validatedData = $request->validate([
-            'quantity' => 'required|int|min:1'
+            'quantity' => 'required|int'
         ]);
 
-        $cart->add($product, $validatedData['quantity'], true);
+        if($validatedData['quantity'] > 0) {
+            $cart->add($product, $validatedData['quantity'], true);
+        } else {
+            $cart->deleteItem($product->id);
+        }
+
+        $item = $cart->getItem($product->id);
 
         return response([
             'success' => true,
             'data' => [
                 'totalQuantity' => $cart->totalQuantity,
                 'totalPrice' => $cart->totalPrice,
-                'totalItemPrice' => $cart->getItem($product->id)['price']
+                'totalItemPrice' => $item ? $item['price'] : null,
+                'items' => $cart->getItems()
             ]
         ]);
     }
