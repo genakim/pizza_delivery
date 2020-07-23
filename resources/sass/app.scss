@@ -1,33 +1,65 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import '~@mdi/font/css/materialdesignicons.min.css';
+
+// Vuetify
+@import '~vuetify/dist/vuetify.min.css';
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.v-application{
+    font-family:$font-family-sans-serif;
+}
 .container {
     max-width: 960px !important;
 }
 
 header {
-    .header-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-        padding: 0 !important;
-    }
-
     .logo {
-        background: url("../images/pizza.png") no-repeat;
+        background: url("../images/logo.svg") no-repeat;
         background-size: contain;
         background-position: center center;
-        height: 3rem;
-        width: 4rem;
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+    .row {
+        min-height: 4.5rem;
+    }
+    background-color: white !important;
+}
+
+footer {
+    background-color: #fff6ee !important;
+}
+
+.product {
+    .v-image {
+        cursor: pointer;
     }
 }
 
+.product__price {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.product__btn-detail {
+    bottom: 0 !important;
+}
+
+.product-detail__btn-close {
+    top: 0 !important;
+    right: 0 !important;
+}
+
+h1 {
+    padding: 2rem 0 0;
+    font-size: 1.7rem;
+}
 
 
 
